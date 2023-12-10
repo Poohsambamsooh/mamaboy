@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+	<style>
+		body {
+				margin: 0px;
+				background: beige;
+				font-size: 1.5em;
+				overflow-x: hidden;
+				overflow-y: hidden;
+		}
+		#backImage {
+			position: absolute;
+			left: 0px; top: 0px;
+			width: 100vw;
+			height: 100vh;
+		} /* #backImage */
+
+		.ingredientBox {
+			position:absolute;
+			padding-left: 3vw;
+			padding-right: 3vw;
+			top: 1vh;
+			left: 3vw;
+
+			color: white;
+			background: #000000aa;
+			border-radius: 20px;
+
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+		} /* #ingredientBox */
+
+		/* h2#ingredientBox  { */
+
+				.headerIngredients  {
+					margin: 0px;
+					padding: 10px;
+					font-weight:normal;
+					font-size: 4vh;
+					text-align: left;
+				} /* h2#ingredientBox */
+
+				.ingredients  {
+					margin: 0px;
+					padding: 5px;
+					font-size: 3vh;
+					text-align: left;
+					font-weight:normal;
+				} /* h2#ingredientBox */
+
+
+		.experimentRoom {
+			position: absolute;
+			top: 25vh;
+			left: 35vw;
+			height: 70vh;
+			width: 60vw;
+
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+		} /* .experimentRoom */
+
+					.tube {
+						width: 12vh;
+						height: 53vh;
+						background: #ffffff88;
+						border: 5px solid green;
+						border-radius: 20px;
+
+						display: flex;
+						flex-direction: column-reverse;
+						justify-content: flex-start;
+						align-items: center;
+					} /* .tube */
+
+							.aCircle {
+								width: 10vh;
+								height: 10vh;
+								margin-top: 1vh;
+								border-radius: 5vh;
+								background: white;
+							} /* .aCircle */
+
+							.itsRed {background: red; }
+							.itsBlue {background: blue; }
+							.itsPurple {background: purple; }
+							.itsYellow {background: yellow; }
+
+					.addingTable {
+						align-self: flex-end;
+						width: 20vw;
+						/* height: 20vh; */
+						padding-top: 2vh;
+						padding-bottom: 2vh;
+						background: #222222aa;
+						border-radius: 20px;
+						border: 5px solid yellow;
+
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						align-items: stretch;
+					} /* .addingTable */
+
+									button {
+										width: 3vw;
+										height: 3vw;
+										font-size: 2vw;
+										border-radius: 2vw;
+									} /* button */
+
+									.addLabel {
+										margin: 0px;
+										padding: 0px;
+										display: inline;
+										color: white;
+									} /* addLabel */
+
+									.Adder {
+										padding: 0px;
+										margin: 0px;
+										display: flex;
+										flex-direction: row;
+										justify-content: space-between;
+										align-items: center;
+									} /* .Adder */
+	</style>
+  </head>
+  <body>
+    <img src="background.webp" id="backImage"> 
+    <div class="ingredientBox">
+      <div> <!-- this inner div allows the text to be left-aligned while placing the block in the center -->
+        <h1 class="headerIngredients">INGREDIENTS:</h1>
+        <h3 class="ingredients"><strong>css:</strong> position:absolute, display:flex, flex-direction:column-reverse</h3> 
+        <h3 class="ingredients"><strong>html:</strong> div, button, h2, h3 </h3> 
+        <h3 class="ingredients"><strong>javascript:</strong> getElementById, innerHTML, createElement, setAttribute </h3> 
+      </div> <!-- this inner div allows the text to be left-aligned while placing the block in the center -->
+    </div>
+
+    <div class="experimentRoom">
+        <div id="leftTube" class="leftOne tube"> </div>
+        <div class="addingTable"> 
+          <div class="Adder">
+              <button onclick="addCircle('left','red')">+</button> 
+              <h2 class="addLabel">red</h2>
+              <button onclick="addCircle('right','red')">+</button> 
+          </div> <!-- redAdder -->
+          <div class="Adder">
+              <button onclick="addCircle('left','blue')">+</button> 
+              <h2 class="addLabel">blue</h2>
+              <button onclick="addCircle('right','blue')">+</button> 
+          </div> <!-- blueAdder -->
+          <div class="Adder">
+              <button onclick="addCircle('left','purple')">+</button> 
+              <h2 class="addLabel">purple</h2>
+              <button onclick="addCircle('right','purple')">+</button> 
+          </div> <!-- purpleAdder -->
+          <div class="Adder">
+              <button onclick="addCircle('left','yellow')">+</button> 
+              <h2 class="addLabel">yellow</h2>
+              <button onclick="addCircle('right','yellow')">+</button> 
+          </div> <!-- yellowAdder -->
+        </div> <!-- addingTable -->
+        <div id="rightTube" class="rightOne tube"> </div>
+    </div> <!-- experimentRoom -->
+
+   <script>
+			var leftTube = document.getElementById("leftTube");
+			var rightTube = document.getElementById("rightTube");
+			var countLeftCircles = 0;
+			var countRightCircles = 0;
+			var maxCapacity = 5;
+
+
+			function addCircle(whichTube,colorOfCircle) {
+			var Circle=document.createElement("div")
+	   if (colorOfCircle == "red") Circle.setAttribute("class","aCircle itsRed")
+       if (colorOfCircle == "blue") Circle.setAttribute("class","aCircle itsBlue")
+       if (colorOfCircle == "purple") Circle.setAttribute("class","aCircle itsPurple")
+       if (colorOfCircle == "yellow") Circle.setAttribute("class","aCircle itsYellow")
+            if ( whichTube == "right") {
+
+				if (countRightCircles<5) {
+					countRightCircles=countRightCircles+1;
+					rightTube.appendChild(Circle)
+					  Circle.setAttribute("onclick","removeCircleRight(this)")
+				}
+
+				console.log(countRightCircles);
+			}
+            if ( whichTube == "left") {
+				if (countLeftCircles<5) {
+						countLeftCircles=countLeftCircles+1;
+						leftTube.appendChild(Circle)
+						Circle.setAttribute("onclick","removeCircleLeft(this)")
+
+					}
+				}
+			} // function addCircle(colorOfCircle)
+
+			 function removeCircleLeft(acircle){
+				var LeftTube=document.getElementById("leftTube")
+				LeftTube.removeChild(acircle);
+				countLeftCircles=countLeftCircles-1;
+           }
+				 function removeCircleRight(acircle){
+				var RightTube=document.getElementById("rightTube")
+				RightTube.removeChild(acircle);
+				countRightCircles=countRightCircles-1;
+			}
+
+		</script>
+  </body>
+</html>
